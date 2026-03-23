@@ -7,14 +7,14 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; background: #f8fafc; padding: 20px; color: #1e293b; }
-        .card { max-width: 600px; margin: 0 auto; background: white; padding: 35px; border-radius: 24px; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .card { max-width: 600px; margin: 0 auto; background: white; padding: 35px; border-radius: 24px; border: 1px solid #e2e8f0; }
         h2 { color: #2563eb; text-align: center; margin-bottom: 30px; font-weight: 800; }
-        .section-h { background: #eff6ff; padding: 12px 15px; margin: 25px 0 15px; font-weight: 700; color: #2563eb; border-radius: 10px; font-size: 12px; text-transform: uppercase; border-left: 5px solid #2563eb; }
+        .section-h { background: #eff6ff; padding: 12px; margin: 25px 0 15px; font-weight: 700; color: #2563eb; border-radius: 10px; font-size: 12px; text-transform: uppercase; border-left: 5px solid #2563eb; }
         .group { margin-bottom: 18px; }
         label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600; color: #64748b; }
-        input, textarea { width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 12px; outline: none; font-size: 14px; box-sizing: border-box; }
-        textarea { height: 80px; resize: none; }
-        .btn { width: 100%; background: #2563eb; color: white; padding: 18px; border: none; border-radius: 14px; font-weight: 700; cursor: pointer; margin-top: 20px; font-size: 1rem; }
+        input, textarea { width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 12px; outline: none; }
+        .btn { width: 100%; background: #2563eb; color: white; padding: 18px; border: none; border-radius: 14px; font-weight: 700; cursor: pointer; margin-top: 20px; }
+        .btn:disabled { background: #cbd5e1; }
     </style>
 </head>
 <body>
@@ -33,7 +33,7 @@
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwyUadUReYZIBZmF1dxxGp2tEANZwH7X9lfsz5OSSR9Z2AsVcSjL1UrbPIKiQzCnsvD/exec';
     const container = document.getElementById('openings-container');
     for (let i = 1; i <= 5; i++) {
-        container.innerHTML += `<div class="section-h">Job Opening #${i} ${i===1?'(Required)':'(Optional)'}</div><div class="group"><label>Job Title ${i===1?'*':''}</label><input type="text" name="Role ${i}" ${i===1?'required':''} placeholder="e.g. Accountant"></div><div class="group"><label>No. of Openings</label><input type="number" name="Openings ${i}" placeholder="e.g. 5"></div><div class="group"><label>Experience</label><input type="text" name="Exp ${i}" placeholder="e.g. 1-2 Years"></div><div class="group"><label>Salary</label><input type="text" name="Salary ${i}" placeholder="e.g. 20k"></div><div class="group"><label>Job Description</label><textarea name="JD ${i}" placeholder="Brief details..."></textarea></div>`;
+        container.innerHTML += `<div class="section-h">Job Opening #${i} (Optional)</div><div class="group"><label>Job Title</label><input type="text" name="Role ${i}" placeholder="e.g. Accountant"></div><div class="group"><label>Qualification</label><input type="text" name="Qual ${i}" placeholder="e.g. B.Com"></div><div class="group"><label>No. of Openings</label><input type="number" name="Openings ${i}" placeholder="e.g. 5"></div><div class="group"><label>Experience</label><input type="text" name="Exp ${i}" placeholder="e.g. 1-2 Years"></div><div class="group"><label>Salary</label><input type="text" name="Salary ${i}" placeholder="e.g. 20k"></div><div class="group"><label>Job Description</label><textarea name="JD ${i}"></textarea></div>`;
     }
     const form = document.getElementById('jobForm');
     form.addEventListener('submit', e => {
