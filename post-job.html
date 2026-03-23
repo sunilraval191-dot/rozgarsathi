@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Job - RozgarSathi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <h1><a href="index.html" style="color: white; text-decoration: none;">RozgarSathi</a></h1>
+        </div>
+        <a href="index.html" class="post-btn">Back to Jobs</a>
+    </header>
+
+    <section class="form-container">
+        <div class="form-box">
+            <h2>Post a Job for Free</h2>
+            <p>Fill out the details below. We will review and publish your job ad shortly.</p>
+            
+            <form action="https://api.web3forms.com/submit" method="POST">
+                
+                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                <div class="input-group">
+                    <label>Company/Business Name *</label>
+                    <input type="text" name="Company Name" required placeholder="e.g. Shreeji Enterprises">
+                </div>
+
+                <div class="input-group">
+                    <label>Job Title *</label>
+                    <input type="text" name="Job Title" required placeholder="e.g. Sr. Accountant">
+                </div>
+
+                <div class="input-group">
+                    <label>Experience Required *</label>
+                    <input type="text" name="Experience" required placeholder="e.g. 1-2 Years or Fresher">
+                </div>
+
+                <div class="input-group">
+                    <label>Monthly Salary (₹) *</label>
+                    <input type="text" name="Salary" required placeholder="e.g. ₹15,000 - ₹20,000">
+                </div>
+
+                <div class="input-group">
+                    <label>Job Location *</label>
+                    <input type="text" name="Location" required placeholder="e.g. Varachha, Surat">
+                </div>
+
+                <div class="input-group">
+                    <label>WhatsApp/Contact Number *</label>
+                    <input type="tel" name="Contact Number" required placeholder="e.g. 9876543210">
+                </div>
+
+                <div class="input-group">
+                    <label>Job Description</label>
+                    <textarea name="Description" rows="4" placeholder="Mention any specific skills like Tally, GST, etc."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Job For Approval</button>
+            </form>
+        </div>
+    </section>
+
+</body>
+</html>
