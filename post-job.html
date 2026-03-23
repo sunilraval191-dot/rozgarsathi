@@ -7,47 +7,50 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; background: #f8fafc; padding: 20px; color: #1e293b; }
-        .card { max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-        h2 { color: #2563eb; text-align: center; margin-bottom: 25px; font-weight: 800; }
-        .section-tag { background: #eff6ff; padding: 8px 12px; margin: 24px 0 12px; font-weight: 700; color: #2563eb; border-radius: 6px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .group { margin-bottom: 16px; }
-        label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600; color: #64748b; }
-        input, textarea { width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; outline: none; font-size: 14px; transition: border-color 0.2s; }
-        input:focus, textarea:focus { border-color: #2563eb; }
-        textarea { height: 80px; resize: none; }
-        .btn { width: 100%; background: #2563eb; color: white; padding: 16px; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 10px; transition: background 0.2s; }
-        .btn:hover { background: #1d4ed8; }
-        .btn:disabled { background: #cbd5e1; cursor: not-allowed; }
+        .card { max-width: 550px; margin: 0 auto; background: white; padding: 35px; border-radius: 24px; border: 1px solid #e2e8f0; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        h2 { color: #2563eb; text-align: center; margin-bottom: 30px; font-weight: 800; font-size: 1.6rem; }
+        .section-h { background: #eff6ff; padding: 10px 15px; margin: 25px 0 15px; font-weight: 700; color: #2563eb; border-radius: 10px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .group { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 7px; font-size: 13px; font-weight: 600; color: #64748b; }
+        input, textarea { width: 100%; padding: 12px 16px; border: 1px solid #e2e8f0; border-radius: 12px; outline: none; font-size: 14px; transition: 0.2s; }
+        input:focus { border-color: #2563eb; }
+        textarea { height: 70px; resize: none; }
+        .btn { width: 100%; background: #2563eb; color: white; padding: 16px; border: none; border-radius: 14px; font-weight: 700; cursor: pointer; margin-top: 15px; font-size: 1rem; }
+        .btn:disabled { background: #cbd5e1; }
     </style>
 </head>
 <body>
     <div class="card">
-        <h2>Post Your Jobs</h2>
+        <h2>Post Your Hiring Needs</h2>
         <form id="jobForm">
-            <div class="group"><label>Company Name*</label><input type="text" name="Company Name" required placeholder="e.g. Maruti Suzuki"></div>
-            <div class="group"><label>Location (Area/City)*</label><input type="text" name="Location" required placeholder="e.g. Kalol, Gandhinagar"></div>
-            <div class="group"><label>WhatsApp Number*</label><input type="number" name="Contact Number" required placeholder="10-digit mobile number"></div>
-            <div class="group"><label>Company Email (For receiving CVs)</label><input type="email" name="Company Email" placeholder="hr@company.com"></div>
+            <div class="group"><label>Company Name*</label><input type="text" name="Company Name" required></div>
+            <div class="group"><label>Location*</label><input type="text" name="Location" required placeholder="Area or City"></div>
+            <div class="group"><label>WhatsApp/Contact*</label><input type="number" name="Contact Number" required></div>
+            <div class="group"><label>Company Email (For CVs)</label><input type="email" name="Company Email"></div>
 
-            <div class="section-tag">Job Opening #1</div>
-            <div class="group"><label>Job Title*</label><input type="text" name="Role 1" required placeholder="e.g. Delivery Boy"></div>
-            <div class="group"><label>No. of Openings</label><input type="number" name="Openings 1" placeholder="e.g. 10"></div>
-            <div class="group"><label>Experience Required</label><input type="text" name="Exp 1" placeholder="e.g. Fresher or 1 Year"></div>
-            <div class="group"><label>Monthly Salary</label><input type="text" name="Salary 1" placeholder="e.g. 15,000 + Petrol"></div>
-            <div class="group"><label>Job Description</label><textarea name="JD 1" placeholder="Briefly describe the work..."></textarea></div>
+            <div class="section-h">Job Opening #1</div>
+            <div class="group"><label>Job Title*</label><input type="text" name="Role 1" required placeholder="e.g. Accountant"></div>
+            <div class="group"><label>No. of Openings</label><input type="number" name="Openings 1" placeholder="e.g. 5"></div>
+            <div class="group"><label>Experience</label><input type="text" name="Exp 1" placeholder="e.g. 1-2 Years"></div>
+            <div class="group"><label>Salary</label><input type="text" name="Salary 1" placeholder="e.g. 20k - 25k"></div>
+            <div class="group"><label>Job Description</label><textarea name="JD 1"></textarea></div>
 
-            <button type="submit" id="btn" class="btn">Post Jobs Now</button>
+            <div class="section-h">Job Opening #2 (Optional)</div>
+            <div class="group"><input type="text" name="Role 2" placeholder="Second Job Title"></div>
+            <div class="group"><input type="number" name="Openings 2" placeholder="Openings"></div>
+
+            <button type="submit" id="subBtn" class="btn">Post Jobs Now</button>
         </form>
     </div>
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwyUadUReYZIBZmF1dxxGp2tEANZwH7X9lfsz5OSSR9Z2AsVcSjL1UrbPIKiQzCnsvD/exec';
         const form = document.getElementById('jobForm');
         form.addEventListener('submit', e => {
-            e.preventDefault(); const b = document.getElementById('btn');
-            b.disabled = true; b.innerText = "Posting Job...";
+            e.preventDefault(); const b = document.getElementById('subBtn');
+            b.disabled = true; b.innerText = "Processing...";
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(() => { alert("Success! Your job is live."); window.location.href="index.html"; })
-            .catch(() => { alert("Error! Please check your internet."); b.disabled = false; b.innerText="Post Jobs Now"; });
+            .then(() => { alert("Success! Jobs are now live."); window.location.href="index.html"; })
+            .catch(() => { alert("Error! Check internet."); b.disabled = false; });
         });
     </script>
 </body>
