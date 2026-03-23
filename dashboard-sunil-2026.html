@@ -2,43 +2,117 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | RozgarSathi</title>
     <style>
-        body { font-family: sans-serif; background: #f1f5f9; padding: 20px; }
-        table { width: 100%; border-collapse: collapse; background: white; margin-top: 20px; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background: #f1f5f9; padding: 20px; color: #1e293b; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        h1 { color: #2563eb; font-weight: 800; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
         th, td { border: 1px solid #e2e8f0; padding: 12px; text-align: left; }
-        th { background: #2563eb; color: white; }
-        .del-btn { background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+        th { background: #f8fafc; color: #64748b; font-weight: 700; text-transform: uppercase; font-size: 12px; }
+        .status-active { color: #22c55e; font-weight: 700; }
+        .status-deleted { color: #ef4444; font-weight: 700; }
+        .del-btn { background: #fee2e2; color: #ef4444; border: 1px solid #fecaca; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.2s; }
+        .del-btn:hover { background: #ef4444; color: white; }
+        .refresh-btn { background: #2563eb; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-weight: 700; float: right; }
     </style>
 </head>
 <body>
-    <h1>RozgarSathi Admin Dashboard</h1>
-    <table id="adminTable">
-        <thead><tr><th>Date</th><th>Company</th><th>Status</th><th>Action</th></tr></thead>
-        <tbody id="adminBody"></tbody>
-    </table>
+    <div class="container">
+        <button class="refresh-btn" onclick="loadData()">🔄 Refresh List</button>
+        <h1>RozgarSathi Admin</h1>
+        <p>Manage your job listings and security.</p>
+        
+        <table id="adminTable">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Company Name</th>
+                    <th>Roles Posted</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="adminBody">
+                <tr><td colspan="5" style="text-align:center;">Loading database...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwyUadUReYZIBZmF1dxxGp2tEANZwH7X9lfsz5OSSR9Z2AsVcSjL1UrbPIKiQzCnsvD/exec';
-    const pw = prompt("Admin Password:");
-    if(pw !== "1234") { window.location.href="index.html"; }
+    
+    // Security Prompt
+    const pw = prompt("Enter Admin Password:");
+    if (pw !== "1234") { // Replace 1234 with your secret code
+        alert("Unauthorized Access!");
+        window.location.href = "index.html";
+    }
 
-    async function load() {
-        const res = await fetch(scriptURL);
-        const data = await res.json();
+    async function loadData() {
         const body = document.getElementById('adminBody');
-        body.innerHTML = "";
-        data.reverse().forEach(row => {
-            const isDel = row.Status === "DELETED";
-            body.innerHTML += `<tr><td>${new Date(row.Timestamp).toLocaleDateString()}</td><td>${row['Company Name']}</td><td>${row.Status || 'Active'}</td><td>${isDel ? '-' : `<button class="del-btn" onclick="hidePost('${row.Timestamp}')">Hide</button>`}</td></tr>`;
-        });
+        try {
+            const response = await fetch(scriptURL);
+            const data = await response.json();
+            body.innerHTML = "";
+
+            data.reverse().forEach(row => {
+                const isDeleted = row.Status === "DELETED";
+                
+                // Count how many roles were actually filled out
+                let roleCount = 0;
+                for(let i=1; i<=5; i++) {
+                    if(row[`Role ${i}`] && row[`Role ${i}`].trim() !== "") roleCount++;
+                }
+
+                const date = new Date(row.Timestamp).toLocaleDateString('en-IN', {
+                    day: '2-digit', month: 'short', year: 'numeric'
+                });
+
+                body.innerHTML += `
+                    <tr>
+                        <td>${date}</td>
+                        <td><strong>${row['Company Name']}</strong><br><small>${row['Location']}</small></td>
+                        <td>${roleCount} Openings</td>
+                        <td class="${isDeleted ? 'status-deleted' : 'status-active'}">
+                            ${isDeleted ? 'HIDDEN' : 'ACTIVE'}
+                        </td>
+                        <td>
+                            ${isDeleted ? '-' : `<button class="del-btn" onclick="hidePost('${row.Timestamp}')">Hide Post</button>`}
+                        </td>
+                    </tr>
+                `;
+            });
+        } catch (e) {
+            body.innerHTML = "<tr><td colspan='5' style='color:red; text-align:center;'>Error loading data. Check Script URL.</td></tr>";
+        }
     }
+
     async function hidePost(id) {
-        if(!confirm("Hide this post?")) return;
-        const fd = new FormData(); fd.append('action', 'DELETE'); fd.append('id', id);
-        await fetch(scriptURL, { method: 'POST', body: fd });
-        load();
+        if (!confirm("Are you sure you want to hide this job from the public website?")) return;
+        
+        const btn = event.target;
+        btn.innerText = "Hiding...";
+        btn.disabled = true;
+
+        const formData = new FormData();
+        formData.append('action', 'DELETE');
+        formData.append('id', id);
+
+        try {
+            await fetch(scriptURL, { method: 'POST', body: formData });
+            alert("Post hidden successfully.");
+            loadData();
+        } catch (e) {
+            alert("Error updating status.");
+            btn.innerText = "Hide Post";
+            btn.disabled = false;
+        }
     }
-    window.onload = load;
+
+    window.onload = loadData;
 </script>
 </body>
 </html>
