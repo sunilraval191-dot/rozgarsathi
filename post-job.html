@@ -4,142 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post a Job - RozgarSathi</title>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-        :root {
-            --primary: #2E86C1;
-            --bg: #FFFFFF;
-            --card-bg: #F5F5F5;
-            --text-dark: #333333;
-            --border: #E0E0E0;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text-dark);
-        }
-
-        /* Header Styles */
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo-container h1 {
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        .logo-container a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .post-btn {
-            background-color: white;
-            color: var(--primary);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        /* Form Styles */
-        .form-container {
-            padding: 40px 5%;
-            display: flex;
-            justify-content: center;
-        }
-
-        .form-box {
-            background-color: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 30px;
-            width: 100%;
-            max-width: 600px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        .form-box h2 {
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-
-        .form-box p {
-            color: #666;
-            margin-bottom: 25px;
-            font-size: 14px;
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .input-group label {
-            font-weight: bold;
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
-
-        .input-group input, 
-        .input-group textarea {
-            padding: 10px;
-            border: 1px solid #CCC;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        .input-group input:focus, 
-        .input-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .submit-btn {
-            background-color: var(--primary);
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: bold;
-            width: 100%;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .submit-btn:hover {
-            background-color: #21618C;
-        }
+        :root { --primary: #2E86C1; --bg: #FFFFFF; --card-bg: #F5F5F5; --text-dark: #333333; --border: #E0E0E0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        body { background-color: var(--bg); color: var(--text-dark); }
+        header { background-color: var(--primary); color: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .logo-container h1 { font-size: 24px; font-weight: 700; }
+        .logo-container a { color: white; text-decoration: none; }
+        .post-btn { background-color: white; color: var(--primary); padding: 10px 20px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; text-decoration: none; }
+        .form-container { padding: 40px 5%; display: flex; justify-content: center; }
+        .form-box { background-color: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 30px; width: 100%; max-width: 600px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .form-box h2 { color: var(--primary); margin-bottom: 5px; }
+        .form-box p { color: #666; margin-bottom: 25px; font-size: 14px; }
+        .input-group { margin-bottom: 15px; display: flex; flex-direction: column; }
+        .input-group label { font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+        .input-group input, .input-group textarea { padding: 10px; border: 1px solid #CCC; border-radius: 4px; font-size: 16px; }
+        .input-group input:focus, .input-group textarea:focus { outline: none; border-color: var(--primary); }
+        .submit-btn { background-color: var(--primary); color: white; padding: 12px; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; width: 100%; cursor: pointer; margin-top: 10px; }
+        #success-msg { display: none; background-color: #D4EDDA; color: #155724; padding: 20px; border-radius: 8px; text-align: center; margin-top: 20px; border: 1px solid #C3E6CB; }
     </style>
 </head>
 <body>
-
     <header>
-        <div class="logo-container">
-            <h1><a href="index.html">RozgarSathi</a></h1>
-        </div>
+        <div class="logo-container"><h1><a href="index.html">RozgarSathi</a></h1></div>
         <a href="index.html" class="post-btn">Back to Jobs</a>
     </header>
 
@@ -148,49 +36,48 @@
             <h2>Post a Job for Free</h2>
             <p>Fill out the details below. We will review and publish your job ad shortly.</p>
             
-            <form action="https://api.web3forms.com/submit" method="POST">
-                
-                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-
-                <div class="input-group">
-                    <label>Company/Business Name</label>
-                    <input type="text" name="Company Name" placeholder="e.g. Shreeji Enterprises">
-                </div>
-
-                <div class="input-group">
-                    <label>Job Title</label>
-                    <input type="text" name="Job Title" placeholder="e.g. Sr. Accountant">
-                </div>
-
-                <div class="input-group">
-                    <label>Experience</label>
-                    <input type="text" name="Experience" placeholder="e.g. 1-2 Years or Fresher">
-                </div>
-
-                <div class="input-group">
-                    <label>Monthly Salary (₹)</label>
-                    <input type="text" name="Salary" placeholder="e.g. ₹15,000 - ₹20,000">
-                </div>
-
-                <div class="input-group">
-                    <label>Job Location</label>
-                    <input type="text" name="Location" placeholder="e.g. Varachha, Surat">
-                </div>
-
-                <div class="input-group">
-                    <label>WhatsApp/Contact Number</label>
-                    <input type="tel" name="Contact Number" placeholder="e.g. 9876543210">
-                </div>
-
-                <div class="input-group">
-                    <label>Job Description</label>
-                    <textarea name="Description" rows="4" placeholder="Mention any specific skills like Tally, GST, etc."></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">Submit Job For Approval</button>
+            <form id="job-form">
+                <div class="input-group"><label>Company Name</label><input type="text" name="Company Name"></div>
+                <div class="input-group"><label>Job Title</label><input type="text" name="Job Title"></div>
+                <div class="input-group"><label>Experience</label><input type="text" name="Experience"></div>
+                <div class="input-group"><label>Monthly Salary (₹)</label><input type="text" name="Salary"></div>
+                <div class="input-group"><label>Job Location</label><input type="text" name="Location"></div>
+                <div class="input-group"><label>Contact Number</label><input type="tel" name="Contact Number"></div>
+                <div class="input-group"><label>Job Description</label><textarea name="Description" rows="4"></textarea></div>
+                <button type="submit" id="submit-btn" class="submit-btn">Submit Job For Approval</button>
             </form>
+
+            <div id="success-msg">
+                <h3>Success!</h3>
+                <p>Your job details have been received.</p>
+                <a href="index.html" style="display:inline-block; margin-top:10px; color:#155724; font-weight:bold;">Return to Homepage</a>
+            </div>
         </div>
     </section>
 
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbx0bkdHiRSSp8BCECIYzjv3rBWayLPoIz6_leNlTeRSCkJFW1GLJoIlAe2owfGuuY-T/exec'; 
+        
+        const form = document.getElementById('job-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const successMsg = document.getElementById('success-msg');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            submitBtn.innerHTML = 'Submitting...'; 
+            submitBtn.disabled = true;
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    form.style.display = 'none'; 
+                    successMsg.style.display = 'block'; 
+                })
+                .catch(error => {
+                    alert("Something went wrong. Please try again.");
+                    submitBtn.innerHTML = 'Submit Job For Approval';
+                    submitBtn.disabled = false;
+                });
+        });
+    </script>
 </body>
 </html>
