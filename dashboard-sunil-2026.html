@@ -5,35 +5,36 @@
     <title>Admin Panel | RozgarSathi</title>
     <style>
         body { font-family: sans-serif; background: #f1f5f9; padding: 20px; }
-        table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         th, td { border-bottom: 1px solid #e2e8f0; padding: 15px; text-align: left; }
         th { background: #2563eb; color: white; }
-        .del-btn { background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+        .del-btn { background: #ef4444; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; }
     </style>
 </head>
 <body>
-    <h1>RozgarSathi Admin Control</h1>
+    <h1>RozgarSathi Dashboard</h1>
     <table id="adminTable">
         <thead><tr><th>Date</th><th>Company</th><th>Status</th><th>Action</th></tr></thead>
         <tbody id="adminBody"></tbody>
     </table>
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwyUadUReYZIBZmF1dxxGp2tEANZwH7X9lfsz5OSSR9Z2AsVcSjL1UrbPIKiQzCnsvD/exec';
-    const pw = prompt("Admin Password:");
-    if(pw !== "1234") window.location.href="index.html";
+    const pw = prompt("Enter Password:");
+    if(pw !== "1234") window.location.href="index.html"; // Default: 1234
 
     async function load() {
+        const body = document.getElementById('adminBody');
+        body.innerHTML = "<tr><td colspan='4'>Loading...</td></tr>";
         const res = await fetch(scriptURL);
         const data = await res.json();
-        const body = document.getElementById('adminBody');
         body.innerHTML = "";
         data.reverse().forEach(row => {
             const isDel = row.Status === "DELETED";
-            body.innerHTML += `<tr><td>${new Date(row.Timestamp).toLocaleDateString()}</td><td>${row['Company Name'] || 'N/A'}</td><td>${row.Status || 'Active'}</td><td>${isDel ? '-' : `<button class="del-btn" onclick="hidePost('${row.Timestamp}')">Hide</button>`}</td></tr>`;
+            body.innerHTML += `<tr><td>${new Date(row.Timestamp).toLocaleDateString()}</td><td>${row['Company Name'] || 'N/A'}</td><td>${row.Status || 'Active'}</td><td>${isDel ? '-' : `<button class="del-btn" onclick="hidePost('${row.Timestamp}')">Hide Post</button>`}</td></tr>`;
         });
     }
     async function hidePost(id) {
-        if(!confirm("Hide this?")) return;
+        if(!confirm("Hide this from public?")) return;
         const fd = new FormData(); fd.append('action', 'DELETE'); fd.append('id', id);
         await fetch(scriptURL, { method: 'POST', body: fd });
         load();
