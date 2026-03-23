@@ -4,312 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RozgarSathi - Local Job Portal</title>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-        :root {
-            --primary: #2E86C1;
-            --bg: #FFFFFF;
-            --card-bg: #F5F5F5;
-            --text-dark: #333333;
-            --border: #E0E0E0;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text-dark);
-        }
-
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo-container h1 { font-size: 24px; font-weight: 700; }
-        .logo-container a { color: white; text-decoration: none; }
-
-        .post-btn {
-            background-color: white;
-            color: var(--primary);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .banner {
-            background-color: #EBF5FB;
-            text-align: center;
-            padding: 40px 20px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .banner h2 { color: var(--primary); margin-bottom: 10px; }
-
-        .categories {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            padding: 20px;
-            flex-wrap: wrap;
-        }
-
-        .cat-btn {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            color: var(--text-dark);
-            transition: all 0.3s ease;
-        }
-
-        .cat-btn:hover, .cat-btn.active { 
-            background-color: var(--primary); 
-            color: white; 
-        }
-
-        .job-container {
-            padding: 20px 5%;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .job-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .job-card .header-tag {
-            background-color: var(--primary);
-            color: white;
-            text-align: center;
-            padding: 5px;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
-
-        .company-name { font-weight: bold; font-size: 20px; color: var(--primary); text-align: center; margin-bottom: 10px; border-bottom: 2px solid var(--border); padding-bottom: 10px;}
-        
-        /* New Styles for Multiple Roles */
-        .role-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
-        .role-item { background-color: white; padding: 12px; border: 1px solid #ccc; border-left: 4px solid var(--primary); border-radius: 4px; }
-        .job-title { font-size: 16px; font-weight: 700; margin-bottom: 5px; color: #111; }
-        .job-details { font-size: 13px; color: #555; line-height: 1.4;}
-
-        .call-btn {
-            margin-top: auto;
-            background-color: #25D366;
-            color: white;
-            text-align: center;
-            padding: 12px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-            display: block;
-        }
-
-        .whatsapp-cta {
-            background-color: #25D366;
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 40px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        @media (max-width: 600px) {
-            .job-container { grid-template-columns: 1fr; }
-        }
+        :root { --primary: #2E86C1; --bg: #FFFFFF; --card-bg: #F8F9FA; --text: #333; --border: #E0E0E0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        header { background: var(--primary); color: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .logo { color: white; text-decoration: none; font-size: 22px; font-weight: bold; }
+        .post-link { background: white; color: var(--primary); padding: 8px 16px; border-radius: 4px; font-weight: bold; text-decoration: none; font-size: 14px; }
+        .banner { background: #EBF5FB; text-align: center; padding: 30px 20px; border-bottom: 1px solid var(--border); }
+        .categories { display: flex; justify-content: center; gap: 8px; padding: 15px; flex-wrap: wrap; }
+        .cat-btn { background: #eee; border: 1px solid #ccc; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 14px; font-weight: bold; }
+        .cat-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .job-grid { padding: 20px 5%; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .job-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 15px; position: relative; display: flex; flex-direction: column; }
+        .hiring-tag { background: var(--primary); color: white; text-align: center; font-size: 12px; font-weight: bold; padding: 4px; border-radius: 4px; margin-bottom: 10px; }
+        .co-name { font-size: 18px; font-weight: bold; color: var(--primary); margin-bottom: 5px; }
+        .loc-tag { font-size: 12px; color: #666; margin-bottom: 12px; display: block; }
+        .role-entry { background: white; border: 1px solid #ddd; border-left: 4px solid var(--primary); padding: 10px; margin-bottom: 8px; border-radius: 4px; }
+        .role-name { font-weight: bold; font-size: 15px; color: #222; }
+        .role-info { font-size: 13px; color: #555; margin-top: 3px; }
+        .call-btn { margin-top: auto; background: #25D366; color: white; text-align: center; padding: 12px; text-decoration: none; border-radius: 6px; font-weight: bold; display: block; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-container">
-            <h1><a href="index.html">RozgarSathi</a></h1>
-        </div>
-        <a href="post-job.html" class="post-btn">Post Job FREE</a>
-    </header>
+<header>
+    <a href="index.html" class="logo">RozgarSathi</a>
+    <a href="post-job.html" class="post-link">Post Job FREE</a>
+</header>
 
-    <section class="banner">
-        <h2>Find Local Staff & Jobs Instantly</h2>
-        <p>Your city's trusted manpower and classifieds portal.</p>
-    </section>
+<section class="banner">
+    <h2>Find Local Staff Instantly</h2>
+    <p>Trusted jobs in your city</p>
+</section>
 
-    <section class="categories">
-        <button class="cat-btn active" data-filter="all">All Jobs</button>
-        <button class="cat-btn" data-filter="accountant">Accountants</button>
-        <button class="cat-btn" data-filter="helper">Helpers</button>
-        <button class="cat-btn" data-filter="sales">Sales</button>
-    </section>
+<section class="categories">
+    <button class="cat-btn active" data-filter="all">All Jobs</button>
+    <button class="cat-btn" data-filter="accountant">Accountants</button>
+    <button class="cat-btn" data-filter="helper">Helpers</button>
+    <button class="cat-btn" data-filter="sales">Sales</button>
+</section>
 
-    <section class="job-container" id="job-board"></section>
+<div class="job-grid" id="jobBoard"></div>
 
-    <section class="whatsapp-cta">
-        Get Daily Job Updates - Join Our WhatsApp Group!
-    </section>
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx0bkdHiRSSp8BCECIYzjv3rBWayLPoIz6_leNlTeRSCkJFW1GLJoIlAe2owfGuuY-T/exec';
+    let allJobs = [];
 
-    <script>
-        // PASTE YOUR EXACT GOOGLE WEB APP URL BETWEEN THE QUOTES BELOW
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbx0bkdHiRSSp8BCECIYzjv3rBWayLPoIz6_leNlTeRSCkJFW1GLJoIlAe2owfGuuY-T/exec'; 
-        
-        let allLiveJobs = []; 
-
-        async function loadJobs() {
-            const jobBoard = document.getElementById('job-board');
-            jobBoard.innerHTML = '<p style="text-align:center; grid-column: 1/-1; font-weight:bold; color:#2E86C1;">Loading latest jobs from RozgarSathi...</p>';
-
-            try {
-                const response = await fetch(scriptURL);
-                const jobsData = await response.json();
-
-                // 1. Filter out jobs older than 7 days
-                const sevenDaysInMillis = 7 * 24 * 60 * 60 * 1000;
-                const currentTime = new Date().getTime();
-
-                allLiveJobs = jobsData.filter(job => {
-                    if (job['Timestamp']) {
-                        const jobTime = new Date(job['Timestamp']).getTime();
-                        return (currentTime - jobTime) <= sevenDaysInMillis;
-                    }
-                    return true; 
-                });
-
-                // 2. Render the jobs (with the new grouping logic)
-                renderJobs(allLiveJobs);
-                setupFilters();
-
-            } catch (error) {
-                jobBoard.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: red;">Failed to load jobs. Please check your internet connection.</p>';
-                console.error('Error fetching data:', error);
-            }
-        }
-
-        // Function to draw the job cards on the screen
-        function renderJobs(jobsToDisplay) {
-            const jobBoard = document.getElementById('job-board');
-            jobBoard.innerHTML = ''; 
-
-            if(jobsToDisplay.length === 0 || jobsToDisplay.result === 'error') {
-                jobBoard.innerHTML = '<p style="text-align:center; grid-column: 1/-1;">No jobs posted in the last 7 days. Click "Post Job FREE" to add one!</p>';
-                return;
-            }
-
-            // --- NEW AUTO-MERGE LOGIC ---
-            const groupedJobs = {};
-
-            jobsToDisplay.forEach(job => {
-                const company = job['Company Name'] || job['Company/Business Name'] || 'Confidential';
-                const phone = job['Contact Number'] || job['WhatsApp/Contact Number'] || '';
-                
-                // We create a unique ID for each company so we don't accidentally merge two different "XYZ Ltd"s with different phone numbers
-                const uniqueKey = company + "_" + phone;
-
-                // If this company isn't in our grouped list yet, add them
-                if (!groupedJobs[uniqueKey]) {
-                    groupedJobs[uniqueKey] = {
-                        companyName: company,
-                        phone: phone,
-                        roles: []
-                    };
-                }
-
-                // Add the specific role details into the company's list
-                groupedJobs[uniqueKey].roles.push({
-                    title: job['Job Title'] || 'Role not specified',
-                    exp: job['Experience'] || job['Experience Required'] || 'Not specified',
-                    salary: job['Salary'] || job['Monthly Salary (₹)'] || 'Based on interview',
-                    location: job['Location'] || job['Job Location'] || 'Not specified',
-                    rawTitle: job['Job Title'] ? job['Job Title'].toLowerCase() : ''
-                });
-            });
-
-            // --- HTML GENERATION ---
-            // Now we loop through our cleanly grouped companies and build the cards
-            Object.values(groupedJobs).forEach(companyData => {
-                let rolesHTML = '';
-                let allTitlesForFiltering = '';
-
-                companyData.roles.forEach(role => {
-                    rolesHTML += `
-                        <div class="role-item">
-                            <div class="job-title">${role.title}</div>
-                            <div class="job-details">
-                                <span><strong>Exp:</strong> ${role.exp}</span> <br>
-                                <span><strong>Salary:</strong> ${role.salary}</span> <br>
-                                <span><strong>Location:</strong> ${role.location}</span>
-                            </div>
-                        </div>
-                    `;
-                    allTitlesForFiltering += role.rawTitle + " ";
-                });
-
-                jobBoard.innerHTML += `
-                    <div class="job-card" data-title="${allTitlesForFiltering}">
-                        <div class="header-tag">WE ARE HIRING</div>
-                        <div class="company-name">${companyData.companyName}</div>
-                        <div class="role-list">
-                            ${rolesHTML}
-                        </div>
-                        <a href="tel:${companyData.phone}" class="call-btn">📞 Call to Apply: ${companyData.phone}</a>
-                    </div>`;
-            });
-        }
-
-        // Function to make the filter buttons work
-        function setupFilters() {
-            const filterButtons = document.querySelectorAll('.cat-btn');
+    async function fetchJobs() {
+        const board = document.getElementById('jobBoard');
+        board.innerHTML = "<p style='text-align:center; grid-column:1/-1;'>Loading jobs...</p>";
+        try {
+            const response = await fetch(scriptURL);
+            const data = await response.json();
             
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
+            const expiry = 7 * 24 * 60 * 60 * 1000; // 7 days
+            const now = Date.now();
 
-                    const filterValue = button.getAttribute('data-filter').toLowerCase();
-
-                    if (filterValue === 'all') {
-                        renderJobs(allLiveJobs);
-                    } else {
-                        const filteredJobs = allLiveJobs.filter(job => {
-                            const title = job['Job Title'] ? job['Job Title'].toLowerCase() : '';
-                            return title.includes(filterValue);
-                        });
-                        renderJobs(filteredJobs);
-                    }
-                });
+            // Filter out jobs older than 7 days
+            allJobs = data.filter(item => {
+                const postDate = new Date(item.Timestamp).getTime();
+                return (now - postDate) < expiry;
             });
+
+            displayJobs(allJobs);
+        } catch (e) { board.innerHTML = "<p style='color:red; text-align:center;'>Error loading data.</p>"; }
+    }
+
+    function displayJobs(jobsList) {
+        const board = document.getElementById('jobBoard');
+        board.innerHTML = "";
+        
+        if (jobsList.length === 0) {
+            board.innerHTML = "<p style='text-align:center; grid-column:1/-1;'>No active jobs found.</p>";
+            return;
         }
 
-        document.addEventListener('DOMContentLoaded', loadJobs);
-    </script>
+        jobsList.forEach(row => {
+            let rolesHtml = "";
+            // Loop through the 3 potential role columns
+            [1, 2, 3].forEach(i => {
+                const rName = row[`Role ${i}`];
+                if (rName && rName.trim() !== "") {
+                    rolesHtml += `
+                        <div class="role-entry">
+                            <div class="role-name">${rName}</div>
+                            <div class="role-info">Exp: ${row[`Exp ${i}`] || 'Fresher'} | Salary: ${row[`Salary ${i}`] || 'Best in Market'}</div>
+                        </div>`;
+                }
+            });
+
+            board.innerHTML += `
+                <div class="job-card">
+                    <div class="hiring-tag">WE ARE HIRING</div>
+                    <div class="co-name">${row['Company Name']}</div>
+                    <span class="loc-tag">📍 ${row['Location']}</span>
+                    ${rolesHtml}
+                    <a href="tel:${row['Contact Number']}" class="call-btn">📞 Call: ${row['Contact Number']}</a>
+                </div>`;
+        });
+    }
+
+    // Filter Logic
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.getAttribute('data-filter').toLowerCase();
+            
+            if (filter === 'all') {
+                displayJobs(allJobs);
+            } else {
+                const filtered = allJobs.filter(row => 
+                    (row['Role 1'] && row['Role 1'].toLowerCase().includes(filter)) ||
+                    (row['Role 2'] && row['Role 2'].toLowerCase().includes(filter)) ||
+                    (row['Role 3'] && row['Role 3'].toLowerCase().includes(filter))
+                );
+                displayJobs(filtered);
+            }
+        });
+    });
+
+    window.onload = fetchJobs;
+</script>
 </body>
 </html>
