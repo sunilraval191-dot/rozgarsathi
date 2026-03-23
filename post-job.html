@@ -3,61 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post Job - RozgarSathi</title>
+    <title>Post Job | RozgarSathi</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-        body { font-family: 'Roboto', sans-serif; background: #f4f7f6; padding: 20px; color: #333; }
-        .form-container { max-width: 500px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h2 { color: #2E86C1; text-align: center; }
-        .section { background: #EBF5FB; padding: 10px; margin: 20px 0 10px; font-weight: bold; color: #2E86C1; border-left: 4px solid #2E86C1; border-radius: 4px; }
-        .group { margin-bottom: 12px; }
-        label { display: block; margin-bottom: 5px; font-size: 13px; font-weight: bold; }
-        input, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; box-sizing: border-box; }
-        textarea { resize: vertical; height: 60px; }
-        .btn { width: 100%; background: #2E86C1; color: white; padding: 14px; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 20px; }
-        .btn:disabled { background: #ccc; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; padding: 20px; }
+        .card { max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 16px; border: 1px solid #e2e8f0; }
+        h2 { color: #2563eb; text-align: center; margin-bottom: 25px; }
+        .section { background: #eff6ff; padding: 10px; margin: 20px 0 10px; font-weight: 700; color: #2563eb; border-radius: 6px; font-size: 13px; }
+        .group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-size: 13px; font-weight: 600; color: #64748b; }
+        input, textarea { width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; outline: none; }
+        input:focus { border-color: #2563eb; }
+        .btn { width: 100%; background: #2563eb; color: white; padding: 15px; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 10px; }
+        .btn:disabled { background: #cbd5e1; }
     </style>
 </head>
 <body>
-<div class="form-container">
-    <h2>Post Job Openings</h2>
-    <form id="jobForm">
-        <div class="group"><label>Company Name*</label><input type="text" name="Company Name" required></div>
-        <div class="group"><label>Location*</label><input type="text" name="Location" required></div>
-        <div class="group"><label>WhatsApp Number*</label><input type="number" name="Contact Number" required></div>
+    <div class="card">
+        <h2>Post Your Openings</h2>
+        <form id="jobForm">
+            <div class="group"><label>Company Name*</label><input type="text" name="Company Name" required></div>
+            <div class="group"><label>Location*</label><input type="text" name="Location" required></div>
+            <div class="group"><label>WhatsApp Number*</label><input type="number" name="Contact Number" required></div>
 
-        <div class="section">OPENING #1</div>
-        <div class="group"><input type="text" name="Role 1" required placeholder="Job Title*"></div>
-        <div class="group"><input type="text" name="Exp 1" placeholder="Experience"></div>
-        <div class="group"><input type="text" name="Salary 1" placeholder="Salary"></div>
-        <div class="group"><textarea name="JD 1" placeholder="Job Description (Optional)"></textarea></div>
+            <div class="section">OPENING #1</div>
+            <div class="group"><input type="text" name="Role 1" required placeholder="Job Title"></div>
+            <div class="group"><input type="text" name="Exp 1" placeholder="Experience"></div>
+            <div class="group"><input type="text" name="Salary 1" placeholder="Salary"></div>
+            <div class="group"><textarea name="JD 1" placeholder="Short description..."></textarea></div>
 
-        <div class="section">OPENING #2 (Optional)</div>
-        <div class="group"><input type="text" name="Role 2" placeholder="Job Title"></div>
-        <div class="group"><input type="text" name="Exp 2" placeholder="Experience"></div>
-        <div class="group"><input type="text" name="Salary 2" placeholder="Salary"></div>
-        <div class="group"><textarea name="JD 2" placeholder="Job Description"></textarea></div>
+            <div class="section">OPENING #2 (Optional)</div>
+            <div class="group"><input type="text" name="Role 2" placeholder="Job Title"></div>
+            <div class="group"><input type="text" name="Exp 2" placeholder="Experience"></div>
+            <div class="group"><input type="text" name="Salary 2" placeholder="Salary"></div>
+            <div class="group"><textarea name="JD 2" placeholder="Short description..."></textarea></div>
 
-        <div class="section">OPENING #3 (Optional)</div>
-        <div class="group"><input type="text" name="Role 3" placeholder="Job Title"></div>
-        <div class="group"><input type="text" name="Exp 3" placeholder="Experience"></div>
-        <div class="group"><input type="text" name="Salary 3" placeholder="Salary"></div>
-        <div class="group"><textarea name="JD 3" placeholder="Job Description"></textarea></div>
-
-        <button type="submit" class="btn" id="subBtn">Post All Jobs</button>
-    </form>
-</div>
-<script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxt3s7AwAJoqMSbBHSvaiSSYCqvmzz49VKS2i4FtAhO_opdft9nAwxRuWjwetE3oQGh/exec';
-    const form = document.getElementById('jobForm');
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        const btn = document.getElementById('subBtn');
-        btn.disabled = true; btn.innerText = "Posting...";
-        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(() => { alert("Posted!"); window.location.href="index.html"; })
-            .catch(() => { alert("Error!"); btn.disabled = false; });
-    });
-</script>
+            <button type="submit" id="btn" class="btn">Post Jobs Now</button>
+        </form>
+    </div>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwyUadUReYZIBZmF1dxxGp2tEANZwH7X9lfsz5OSSR9Z2AsVcSjL1UrbPIKiQzCnsvD/exec';
+        const form = document.getElementById('jobForm');
+        form.addEventListener('submit', e => {
+            e.preventDefault(); const b = document.getElementById('btn');
+            b.disabled = true; b.innerText = "Posting...";
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(() => { alert("Success!"); window.location.href="index.html"; })
+            .catch(() => { alert("Error!"); b.disabled = false; b.innerText="Post Jobs Now"; });
+        });
+    </script>
 </body>
 </html>
