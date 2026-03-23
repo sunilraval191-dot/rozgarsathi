@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RozgarSathi | Best Local Jobs in Kalol & Gandhinagar</title>
-    <meta name="description" content="Find the latest job openings in Kalol. Hire accountants, chemists, and office staff. Post jobs for free on RozgarSathi.">
+    <title>RozgarSathi | Jobs in Kalol & Gandhinagar</title>
+    <meta name="description" content="Find local jobs in Kalol. Hire Accountants, Chemists, and Helpers for free.">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
         :root { --primary: #2563eb; --bg: #f8fafc; --text: #1e293b; --success: #22c55e; --cv: #7c3aed; --border: #e2e8f0; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); color: var(--text); line-height: 1.5; }
         header { background: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary); text-decoration: none; letter-spacing: -1px; }
+        .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary); text-decoration: none; }
         .post-btn { background: var(--primary); color: white; padding: 0.7rem 1.4rem; border-radius: 10px; font-weight: 700; text-decoration: none; font-size: 0.85rem; }
         .hero { background: white; padding: 2.5rem 5%; border-bottom: 1px solid var(--border); text-align: center; }
         .search-box { max-width: 600px; margin: 0 auto; }
@@ -24,10 +24,10 @@
         .loc { font-size: 0.9rem; color: #64748b; margin-bottom: 1.5rem; font-weight: 500; }
         .role-card { background: #f8fafc; border: 1px solid var(--border); border-radius: 16px; padding: 1.2rem; margin-bottom: 1rem; border-left: 5px solid var(--primary); }
         .role-title { font-weight: 700; font-size: 1.1rem; color: #1e293b; margin-bottom: 8px; }
-        .badge { font-size: 0.75rem; font-weight: 600; padding: 0.4rem 0.75rem; border-radius: 8px; background: white; border: 1px solid var(--border); display: inline-flex; align-items: center; gap: 6px; margin: 0 6px 6px 0; color: #475569; }
-        .jd { font-size: 0.85rem; color: #475569; margin-top: 10px; border-top: 1px solid #e2e8f0; padding-top: 8px; line-height: 1.4; }
+        .badge { font-size: 0.7rem; font-weight: 600; padding: 0.4rem 0.6rem; border-radius: 8px; background: white; border: 1px solid var(--border); display: inline-flex; align-items: center; gap: 5px; margin: 0 4px 4px 0; color: #475569; }
+        .jd { font-size: 0.85rem; color: #475569; margin-top: 8px; border-top: 1px solid #e2e8f0; padding-top: 8px; }
         .actions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: auto; padding-top: 10px; }
-        .act-btn { text-align: center; padding: 0.8rem; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 5px; color: white; transition: 0.2s; }
+        .act-btn { text-align: center; padding: 0.9rem; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 5px; color: white; transition: 0.2s; }
         .call { background: var(--success); }
         .share { background: #25D366; }
         .email { background: var(--cv); }
@@ -35,7 +35,7 @@
 </head>
 <body>
     <header><a href="index.html" class="logo">RozgarSathi</a><a href="post-job.html" class="post-btn">Post Job FREE</a></header>
-    <section class="hero"><div class="search-box"><input type="text" id="searchInput" placeholder="Search area, company, or job role..."></div></section>
+    <section class="hero"><div class="search-box"><input type="text" id="searchInput" placeholder="Search area, company, or role..."></div></section>
     <div class="job-grid" id="jobBoard"></div>
 
 <script>
@@ -44,7 +44,7 @@
 
     async function fetchJobs() {
         const board = document.getElementById('jobBoard');
-        board.innerHTML = "<p style='text-align:center; grid-column:1/-1; padding:3rem;'>Loading current openings...</p>";
+        board.innerHTML = "<p style='text-align:center; grid-column:1/-1;'>Loading jobs...</p>";
         try {
             const response = await fetch(scriptURL);
             const data = await response.json();
@@ -52,26 +52,26 @@
             const week = 7 * 24 * 60 * 60 * 1000;
             allJobs = data.filter(item => (now - new Date(item.Timestamp).getTime()) < week && item.Status !== "DELETED").reverse();
             display(allJobs);
-        } catch (e) { board.innerHTML = "<p style='text-align:center; color:red; grid-column:1/-1;'>Connection Error.</p>"; }
+        } catch (e) { board.innerHTML = "<p style='text-align:center; color:red; grid-column:1/-1;'>Network Error.</p>"; }
     }
 
     function display(list) {
         const board = document.getElementById('jobBoard'); board.innerHTML = "";
         list.forEach(row => {
             let roles = "";
-            let waText = `*New Job Alert from ${row['Company Name']}*%0A📍 ${row['Location']}%0A%0A`;
+            let waText = `*Job Alert from ${row['Company Name']}*%0A📍 ${row['Location']}%0A%0A`;
             
             for(let i=1; i<=5; i++) {
-                const title = row[`Role ${i}`], open = row[`Openings ${i}`];
-                if (title && title.trim() !== "") {
-                    roles += `<div class="role-card"><div class="role-title">${title}</div><div>${open ? `<span class="badge">👥 Openings: ${open}</span>` : ''}<span class="badge">⏳ Exp: ${row['Exp '+i] || 'Fresher'}</span><span class="badge">💰 Salary: ${row['Salary '+i] || 'Best'}</span></div>${row['JD '+i] ? `<div class="jd">${row['JD '+i]}</div>` : ''}</div>`;
-                    waText += `🔹 *${title}* (${open || 1} Positions)%0A`;
+                const r = row[`Role ${i}`], q = row[`Qual ${i}`], o = row[`Openings ${i}`];
+                if (r && r.trim() !== "") {
+                    roles += `<div class="role-card"><div class="role-title">${r}</div><div>${o ? `<span class="badge">👥 ${o} Openings</span>` : ''}${q ? `<span class="badge">🎓 ${q}</span>` : ''}<span class="badge">⏳ Exp: ${row['Exp '+i] || 'Any'}</span><span class="badge">💰 ${row['Salary '+i] || 'Best Salary'}</span></div>${row['JD '+i] ? `<div class="jd">${row['JD '+i]}</div>` : ''}</div>`;
+                    waText += `🔹 *${r}* ${q ? `[${q}]` : ''}%0A`;
                 }
             }
-            waText += `%0A👉 *View & Apply:* https://sunilraval191.github.io/rozgarsathi/%0A%0A_Shared via RozgarSathi_`;
+            waText += `%0A👉 *Details:* https://sunilraval191.github.io/rozgarsathi/%0A_Shared via RozgarSathi_`;
             
-            const v = (row.Verified === "TRUE" || row.Verified === true) ? '<div class="verified">🛡️ Verified Business</div>' : '';
-            board.innerHTML += `<div class="job-card">${v}<div class="co-name">${row['Company Name']}</div><div class="loc">📍 Location: ${row['Location']}</div><div>${roles}</div><div class="actions"><a href="tel:${row['Contact Number']}" class="act-btn call">📞 Call</a><a href="https://api.whatsapp.com/send?text=${waText}" target="_blank" class="act-btn share">🟢 Share</a><a href="mailto:${row['Company Email']}?subject=Job Application" class="act-btn email">📧 CV</a></div></div>`;
+            const v = (row.Verified === "TRUE" || row.Verified === true) ? '<div class="v-badge">🛡️ Verified Business</div>' : '';
+            board.innerHTML += `<div class="job-card">${v}<div class="co-name">${row['Company Name']}</div><div class="loc">📍 ${row['Location']}</div><div>${roles}</div><div class="actions"><a href="tel:${row['Contact Number']}" class="act-btn call">📞 Call</a><a href="https://api.whatsapp.com/send?text=${waText}" target="_blank" class="act-btn share">🟢 Share</a><a href="mailto:${row['Company Email']}?subject=Job Application" class="act-btn email">📧 CV</a></div></div>`;
         });
     }
 
