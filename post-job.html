@@ -6,24 +6,25 @@
     <title>Post Job | RozgarSathi</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; background: #f8fafc; padding: 20px; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; padding: 20px; color: #1e293b; }
         .card { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 20px; border: 1px solid #e2e8f0; }
         h2 { color: #2563eb; text-align: center; margin-bottom: 25px; font-weight: 800; }
-        .section-h { background: #eff6ff; padding: 10px; margin: 20px 0 10px; font-weight: 700; color: #2563eb; border-radius: 8px; font-size: 11px; text-transform: uppercase; border-left: 4px solid #2563eb; }
+        .section-h { background: #eff6ff; padding: 10px; margin: 25px 0 10px; font-weight: 700; color: #2563eb; border-radius: 8px; font-size: 11px; text-transform: uppercase; border-left: 4px solid #2563eb; }
         .group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-size: 13px; font-weight: 600; color: #64748b; }
-        input { width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 10px; outline: none; }
-        .btn { width: 100%; background: #2563eb; color: white; padding: 15px; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; margin-top: 20px; }
+        input, textarea { width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 10px; outline: none; font-family: inherit; }
+        textarea { height: 80px; resize: none; }
+        .btn { width: 100%; background: #2563eb; color: white; padding: 18px; border: none; border-radius: 14px; font-weight: 700; cursor: pointer; margin-top: 20px; }
     </style>
 </head>
 <body>
     <div class="card">
         <h2>Post Your Hiring Needs</h2>
         <form id="jobForm">
-            <div class="group"><label>Company Name (Optional)</label><input type="text" name="Company Name"></div>
-            <div class="group"><label>Location (Optional)</label><input type="text" name="Location"></div>
-            <div class="group"><label>WhatsApp Number (Optional)</label><input type="number" name="Contact Number"></div>
-            <div class="group"><label>Company Email (Optional)</label><input type="email" name="Company Email"></div>
+            <div class="group"><label>Company Name</label><input type="text" name="Company Name"></div>
+            <div class="group"><label>Location</label><input type="text" name="Location"></div>
+            <div class="group"><label>WhatsApp Number</label><input type="number" name="Contact Number"></div>
+            <div class="group"><label>Company Email</label><input type="email" name="Company Email"></div>
             <div id="openings-container"></div>
             <button type="submit" id="subBtn" class="btn">Submit All Roles</button>
         </form>
@@ -32,15 +33,22 @@
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwyUadUReYZIBZmF1dxxGp2tEANZwH7X9lfsz5OSSR9Z2AsVcSjL1UrbPIKiQzCnsvD/exec';
     const container = document.getElementById('openings-container');
     for (let i = 1; i <= 5; i++) {
-        container.innerHTML += `<div class="section-h">Opening #${i}</div><div class="group"><label>Job Title</label><input type="text" name="Role ${i}"></div><div class="group"><label>Qualification</label><input type="text" name="Qual ${i}"></div><div class="group"><label>No. of Openings</label><input type="number" name="Openings ${i}"></div><div class="group"><label>Experience</label><input type="text" name="Exp ${i}"></div><div class="group"><label>Salary Range</label><input type="text" name="Salary ${i}"></div>`;
+        container.innerHTML += `
+            <div class="section-h">Opening #${i}</div>
+            <div class="group"><label>Job Title</label><input type="text" name="Role ${i}" placeholder="e.g. Chemist"></div>
+            <div class="group"><label>Qualification</label><input type="text" name="Qual ${i}" placeholder="e.g. B.Sc"></div>
+            <div class="group"><label>No. of Openings</label><input type="number" name="Openings ${i}"></div>
+            <div class="group"><label>Experience</label><input type="text" name="Exp ${i}"></div>
+            <div class="group"><label>Salary</label><input type="text" name="Salary ${i}"></div>
+            <div class="group"><label>Job Description</label><textarea name="JD ${i}"></textarea></div>`;
     }
     const form = document.getElementById('jobForm');
     form.addEventListener('submit', e => {
         e.preventDefault(); const b = document.getElementById('subBtn');
         b.innerText = "Processing..."; b.disabled = true;
         fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(() => { alert("Thank you! Listing is live."); window.location.href="index.html"; })
-        .catch(() => { alert("Oops! Something went wrong."); b.disabled = false; b.innerText = "Submit All Roles"; });
+        .then(() => { alert("Success! Jobs are live."); window.location.href="index.html"; })
+        .catch(() => { alert("Error!"); b.disabled = false; b.innerText = "Submit All Roles"; });
     });
 </script>
 </body>
