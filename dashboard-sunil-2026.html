@@ -2,40 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | KamNiVaat</title>
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin | KamNiVaat</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; background: #f1f5f9; padding: 20px; color: #1e293b; }
-        .container { max-width: 1100px; margin: 0 auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-        h1 { color: #2563eb; font-weight: 800; margin-bottom: 5px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 25px; font-size: 13px; }
-        th, td { border: 1px solid #e2e8f0; padding: 12px; text-align: left; vertical-align: top; }
-        th { background: #f8fafc; color: #64748b; font-weight: 700; text-transform: uppercase; font-size: 11px; }
-        .contact-link { color: #2563eb; text-decoration: none; display: block; margin-top: 2px; font-weight: 500; }
-        .del-btn { background: #fee2e2; color: #ef4444; border: 1px solid #fecaca; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: 700; }
+        body { font-family: sans-serif; background: #f1f5f9; padding: 20px; }
+        .c { max-width: 1000px; margin: 0 auto; background: white; padding: 20px; border-radius: 15px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #e2e8f0; padding: 12px; text-align: left; }
+        th { background: #2563eb; color: white; }
+        .del-btn { background: #ef4444; color: white; border: none; padding: 8px; border-radius: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>KamNiVaat Admin</h1>
+    <div class="c">
+        <h1>Admin Control</h1>
         <table id="adminTable">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Company & Contact</th>
-                    <th>Roles</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
+            <thead><tr><th>Date</th><th>Employer</th><th>Roles</th><th>Status</th><th>Action</th></tr></thead>
             <tbody id="adminBody"></tbody>
         </table>
     </div>
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwyUadUReYZIBZmF1dxxGp2tEANZwH7X9lfsz5OSSR9Z2AsVcSjL1UrbPIKiQzCnsvD/exec';
-    const pw = prompt("Admin Password:");
-    if (pw !== "1234") { window.location.href = "index.html"; }
+    const pw = prompt("Password:");
+    if (pw !== "1234") window.location.href = "index.html";
 
     async function loadData() {
         const res = await fetch(scriptURL);
@@ -43,16 +32,10 @@
         const body = document.getElementById('adminBody');
         body.innerHTML = "";
         data.reverse().forEach(row => {
-            let rolesList = "";
-            for(let i=1; i<=5; i++) { if(row[`Role ${i}`]) rolesList += `• ${row[`Role ${i}`]}<br>`; }
+            let roles = "";
+            for(let i=1; i<=5; i++) { if(row[`Role ${i}`]) roles += `• ${row[`Role ${i}`]}<br>`; }
             const isDel = row.Status === "DELETED";
-            body.innerHTML += `<tr>
-                <td>${new Date(row.Timestamp).toLocaleDateString()}</td>
-                <td><strong>${row['Company Name'] || 'N/A'}</strong><br><a href="tel:${row['Contact Number']}" class="contact-link">${row['Contact Number']}</a><br>${row['Company Email'] || ''}</td>
-                <td>${rolesList}</td>
-                <td>${row.Status || 'Active'}</td>
-                <td>${isDel ? '-' : `<button class="del-btn" onclick="hidePost('${row.Timestamp}')">Hide</button>`}</td>
-            </tr>`;
+            body.innerHTML += `<tr><td>${new Date(row.Timestamp).toLocaleDateString()}</td><td><strong>${row['Company Name'] || 'N/A'}</strong><br>${row['Contact Number']}</td><td>${roles}</td><td>${row.Status || 'Active'}</td><td>${isDel ? '-' : `<button class="del-btn" onclick="hidePost('${row.Timestamp}')">Hide</button>`}</td></tr>`;
         });
     }
     async function hidePost(id) {
