@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>KamNiVaat | Jobs in Kalol & Gandhinagar</title>
-    <meta name="description" content="KamNiVaat is Kalol's #1 Job Portal. Find local openings for Accountants, Chemists, and Helpers.">
-    
+    <title>KamNiVaat | Local Jobs in Kalol & Gandhinagar</title>
+    <meta name="description" content="KamNiVaat is Kalol's #1 Job Portal. Find local openings.">
     <meta name="google-site-verification" content="j3I1Wz_Ec_huvAWYzIh6CAZdJkLt0CL-eoitgro1Bsk" />
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
         :root { --primary: #2563eb; --bg: #f8fafc; --text: #1e293b; --border: #e2e8f0; }
@@ -66,16 +63,37 @@
             let waText = `*Job Alert from ${row['Company Name']}*%0A📍 ${row['Location'] || 'Local Area'}%0A%0A`;
             
             for(let i=1; i<=5; i++) {
-                const r = row[`Role ${i}`], q = row[`Qual ${i}`], o = row[`Openings ${i}`], d = row[`JD ${i}`];
+                const r = row[`Role ${i}`], q = row[`Qual ${i}`], o = row[`Openings ${i}`], e = row[`Exp ${i}`], s = row[`Salary ${i}`], d = row[`JD ${i}`];
                 if (r && r.trim() !== "") {
-                    rolesHtml += `<div class="role-card"><div class="role-title">● ${safeText(r)}</div><div>${q ? `<span class="badge">🎓 Qual: ${safeText(q)}</span>` : ''}${o ? `<span class="badge">👥 ${safeText(o)} Positions</span>` : ''}<span class="badge">⏳ Exp: ${safeText(row['Exp '+i] || 'Any')}</span></div>${d ? `<div class="jd-text">${safeText(d)}</div>` : ''}</div>`;
+                    rolesHtml += `<div class="role-card">
+                        <div class="role-title">● ${safeText(r)}</div>
+                        <div>
+                            ${q ? `<span class="badge">🎓 Qual: ${safeText(q)}</span>` : ''}
+                            ${o ? `<span class="badge">👥 ${safeText(o)} Positions</span>` : ''}
+                            ${e ? `<span class="badge">⏳ Exp: ${safeText(e)}</span>` : ''}
+                            ${s ? `<span class="badge">💰 ${safeText(s)}</span>` : ''}
+                        </div>
+                        ${d ? `<div class="jd-text">${safeText(d)}</div>` : ''}
+                    </div>`;
                     waText += `🔹 *${r}*%0A`;
                 }
             }
             waText += `%0A👉 *Details:* https://sunilraval191-dot.github.io/KamNiVaat/`;
 
             const vHtml = (row.Verified === "TRUE" || row.Verified === true) ? '<div class="v-badge">🛡️ Verified Business</div>' : '';
-            card.innerHTML = `${vHtml}<div class="co-name">${safeText(row['Company Name'] || 'Hiring Company')}</div><div class="loc">📍 ${safeText(row['Location'] || 'Local Area')}</div><div>${rolesHtml}</div><div class="contact-box"><div style="font-size:0.75rem; font-weight:800; color:#94a3b8; text-transform:uppercase;">Contact Details:</div><div style="font-size:1.1rem; font-weight:800;">📞 M: ${safeText(row['Contact Number'] || 'N/A')}</div>${row['Company Email'] ? `<div style="color:#2563eb; font-weight:600;">📧 ${safeText(row['Company Email'])}</div>` : ''}</div><a href="https://api.whatsapp.com/send?text=${waText}" target="_blank" class="share-btn">🟢 Share on WhatsApp</a>`;
+            
+            // This section displays Company, Address (Loc), and Contact details
+            card.innerHTML = `
+                ${vHtml}
+                <div class="co-name">${safeText(row['Company Name'] || 'Hiring Company')}</div>
+                <div class="loc">📍 ${safeText(row['Location'] || 'Local Area')}</div>
+                <div>${rolesHtml}</div>
+                <div class="contact-box">
+                    <div style="font-size:0.75rem; font-weight:800; color:#94a3b8; text-transform:uppercase;">Contact Details:</div>
+                    <div style="font-size:1.1rem; font-weight:800;">📞 M: ${safeText(row['Contact Number'] || 'N/A')}</div>
+                    ${row['Company Email'] ? `<div style="color:#2563eb; font-weight:600;">📧 ${safeText(row['Company Email'])}</div>` : ''}
+                </div>
+                <a href="https://api.whatsapp.com/send?text=${waText}" target="_blank" class="share-btn">🟢 Share on WhatsApp</a>`;
             board.appendChild(card);
         });
     }
