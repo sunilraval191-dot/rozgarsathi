@@ -10,45 +10,56 @@
         body { font-family: 'Inter', sans-serif; background: #eff6ff; padding: 20px; color: #1e293b; }
         .card { max-width: 650px; margin: 0 auto; background: white; padding: 40px; border-radius: 24px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
         h2 { color: #1e40af; text-align: center; margin-bottom: 10px; font-weight: 800; font-size: 1.8rem; }
-        p.sub { text-align: center; color: #64748b; margin-bottom: 30px; font-size: 0.9rem; }
-        .section-h { background: #f1f5f9; padding: 12px 15px; margin: 30px 0 15px; font-weight: 800; color: #334155; border-radius: 10px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; }
+        .section-h { background: #f1f5f9; padding: 12px 15px; margin: 30px 0 15px; font-weight: 800; color: #334155; border-radius: 10px; font-size: 12px; text-transform: uppercase; border-left: 4px solid #2563eb; display: flex; align-items: center; }
         .section-h::before { content: "💼"; margin-right: 10px; }
-        .group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 700; color: #475569; }
-        input, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 12px; outline: none; transition: 0.2s; font-size: 15px; }
+        .group { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 700; color: #475569; }
+        input, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 12px; outline: none; transition: 0.2s; font-size: 14px; }
         input:focus { border-color: #2563eb; background: #f8faff; }
-        textarea { height: 90px; resize: none; }
+        textarea { height: 80px; resize: none; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .btn { width: 100%; background: #2563eb; color: white; padding: 18px; border: none; border-radius: 16px; font-weight: 800; cursor: pointer; margin-top: 30px; font-size: 1rem; box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3); }
         .hp-field { display: none !important; }
     </style>
 </head>
 <body>
     <div class="card">
-        <h2>Post on KamNiVaat</h2>
-        <p class="sub">Hire local talent instantly. All fields are optional.</p>
+        <h2>Post Hiring Needs</h2>
         <form id="jobForm">
             <input type="text" name="hp_field" class="hp-field">
-            <div class="group"><label>🏢 Company Name</label><input type="text" name="Company Name" placeholder="e.g. Swastik Crop Care"></div>
-            <div class="group"><label>📍 Location</label><input type="text" name="Location" placeholder="e.g. Kalol / Gandhinagar"></div>
-            <div class="group"><label>📱 Contact Number</label><input type="number" name="Contact Number" placeholder="Candidates will call here"></div>
-            <div class="group"><label>📧 Company Email</label><input type="email" name="Company Email" placeholder="hr@company.com"></div>
+            <div class="group"><label>🏢 Company Name</label><input type="text" name="Company Name"></div>
+            <div class="group"><label>📍 Full Address / Location</label><input type="text" name="Location"></div>
+            <div class="grid-2">
+                <div class="group"><label>📱 Contact Number</label><input type="number" name="Contact Number"></div>
+                <div class="group"><label>📧 Company Email</label><input type="email" name="Company Email"></div>
+            </div>
             <div id="openings-container"></div>
-            <button type="submit" id="subBtn" class="btn">🚀 Post Jobs Now</button>
+            <button type="submit" id="subBtn" class="btn">🚀 Post Jobs on KamNiVaat</button>
         </form>
     </div>
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwyUadUReYZIBZmF1dxxGp2tEANZwH7X9lfsz5OSSR9Z2AsVcSjL1UrbPIKiQzCnsvD/exec';
     const container = document.getElementById('openings-container');
     for (let i = 1; i <= 5; i++) {
-        container.innerHTML += `<div class="section-h">Opening #${i}</div><div class="group"><label>Job Title</label><input type="text" name="Role ${i}" placeholder="e.g. Accountant"></div><div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;"><div class="group"><label>Qual</label><input type="text" name="Qual ${i}"></div><div class="group"><label>Exp</label><input type="text" name="Exp ${i}"></div></div><div class="group"><label>Description</label><textarea name="JD ${i}"></textarea></div>`;
+        container.innerHTML += `
+            <div class="section-h">Job Opportunity #${i}</div>
+            <div class="group"><label>Role Title</label><input type="text" name="Role ${i}"></div>
+            <div class="grid-3">
+                <div class="group"><label>Qual</label><input type="text" name="Qual ${i}"></div>
+                <div class="group"><label>Positions</label><input type="number" name="Openings ${i}"></div>
+                <div class="group"><label>Exp</label><input type="text" name="Exp ${i}"></div>
+            </div>
+            <div class="group"><label>Salary</label><input type="text" name="Salary ${i}"></div>
+            <div class="group"><label>Work Description (JD)</label><textarea name="JD ${i}"></textarea></div>`;
     }
     const form = document.getElementById('jobForm');
     form.addEventListener('submit', e => {
         e.preventDefault(); const b = document.getElementById('subBtn');
-        b.innerText = "Processing..."; b.disabled = true;
+        b.innerText = "Posting Listing..."; b.disabled = true;
         fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(() => { alert("Success! Your jobs are live."); window.location.href="index.html"; })
-        .catch(() => { alert("Error!"); b.disabled = false; });
+        .then(() => { alert("Listing successfully posted!"); window.location.href="index.html"; })
+        .catch(() => { alert("Connection Error."); b.disabled = false; });
     });
 </script>
 </body>
