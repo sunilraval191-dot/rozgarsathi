@@ -6,68 +6,45 @@
     <title>Post Job | KamNiVaat</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; background: #eff6ff; padding: 20px; color: #1e293b; }
-        .card { max-width: 700px; margin: 0 auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        h2 { color: #2563eb; text-align: center; margin-bottom: 25px; font-weight: 800; }
-        .section-h { background: #f8fafc; padding: 12px; margin: 25px 0 15px; font-weight: 700; color: #334155; border-left: 4px solid #2563eb; font-size: 13px; text-transform: uppercase; }
-        .form-row { display: flex; flex-direction: column; gap: 15px; margin-bottom: 15px; }
-        @media (min-width: 600px) { .form-row { flex-direction: row; } .form-group { flex: 1; } }
-        .form-group { display: flex; flex-direction: column; }
-        label { margin-bottom: 6px; font-size: 13px; font-weight: 700; color: #475569; }
-        input, textarea { padding: 12px; border: 2px solid #e2e8f0; border-radius: 10px; outline: none; font-size: 14px; transition: 0.2s; }
-        input:focus { border-color: #2563eb; background: #f8faff; }
-        textarea { height: 80px; resize: none; }
-        .btn { width: 100%; background: #2563eb; color: white; padding: 18px; border: none; border-radius: 14px; font-weight: 800; cursor: pointer; margin-top: 30px; font-size: 1rem; }
+        body { font-family: 'Inter', sans-serif; background: #eff6ff; padding: 20px; }
+        .card { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .group { margin-bottom: 15px; display: flex; flex-direction: column; }
+        label { font-weight: 700; margin-bottom: 5px; font-size: 13px; }
+        input, textarea { padding: 12px; border: 2px solid #e2e8f0; border-radius: 10px; outline: none; }
+        input:focus { border-color: #2563eb; }
+        .btn { width: 100%; background: #2563eb; color: white; padding: 15px; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; margin-top: 20px; }
         .hp-field { display: none !important; }
     </style>
 </head>
 <body>
     <div class="card">
-        <h2>Post on KamNiVaat</h2>
+        <h2 style="text-align:center; margin-bottom:20px;">Post Job FREE</h2>
         <form id="jobForm">
             <input type="text" name="hp_field" class="hp-field">
-            <div class="section-h">Company Details</div>
-            <div class="form-row">
-                <div class="form-group"><label>Company Name</label><input type="text" name="Company Name" required></div>
-                <div class="form-group"><label>Address / Location</label><input type="text" name="Location" required></div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label>WhatsApp Number</label><input type="number" name="Contact Number" required></div>
-                <div class="form-group"><label>Email (Optional)</label><input type="email" name="Company Email"></div>
-            </div>
-            <div class="form-group">
-                <label>📝 Interview Details / Walk-in Info</label>
-                <textarea name="Company Desc" placeholder="Example: Walk-in Interview on Monday, 10 AM..."></textarea>
-            </div>
-
-            <div id="openings-container"></div>
-            <button type="submit" id="subBtn" class="btn">🚀 Post Jobs Now</button>
+            <div class="group"><label>Company Name</label><input type="text" name="Company Name" required></div>
+            <div class="group"><label>Location</label><input type="text" name="Location" required></div>
+            <div class="group"><label>Contact Number</label><input type="number" name="Contact Number" required></div>
+            <div class="group"><label>Interview Details (Date/Time)</label><textarea name="Company Desc"></textarea></div>
+            
+            <div id="container"></div>
+            <button type="submit" id="btn" class="btn">🚀 Post Now</button>
         </form>
     </div>
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwyUadUReYZIBZmF1dxxGp2tEANZwH7X9lfsz5OSSR9Z2AsVcSjL1UrbPIKiQzCnsvD/exec';
-    const container = document.getElementById('openings-container');
-    for (let i = 1; i <= 5; i++) {
-        container.innerHTML += `
-            <div class="section-h">Opening #${i}</div>
-            <div class="form-row">
-                <div class="form-group"><label>Job Title</label><input type="text" name="Role ${i}"></div>
-                <div class="form-group"><label>Qualification</label><input type="text" name="Qual ${i}"></div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label>Experience</label><input type="text" name="Exp ${i}"></div>
-                <div class="form-group"><label>Salary</label><input type="text" name="Salary ${i}"></div>
-                <div class="form-group"><label>Openings</label><input type="number" name="Openings ${i}"></div>
-            </div>
-            <div class="form-group"><label>Detailed Description</label><textarea name="JD ${i}"></textarea></div>`;
+    const cont = document.getElementById('container');
+    for (let i = 1; i <= 3; i++) {
+        cont.innerHTML += `<div style="background:#f8fafc; padding:15px; border-radius:10px; margin-top:15px;">
+            <div class="group"><label>Job Title ${i}</label><input type="text" name="Role ${i}"></div>
+            <div class="group"><label>Qual / Salary</label><input type="text" name="Qual ${i}"></div>
+        </div>`;
     }
     const form = document.getElementById('jobForm');
     form.addEventListener('submit', e => {
-        e.preventDefault(); const b = document.getElementById('subBtn');
-        b.innerText = "Processing..."; b.disabled = true;
+        e.preventDefault(); document.getElementById('btn').innerText = "Posting...";
         fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(() => { alert("Job Successfully Listed!"); window.location.href="index.html"; })
-        .catch(() => { b.disabled = false; b.innerText = "Post Jobs Now"; });
+        .then(() => { alert("Success!"); window.location.href="index.html"; })
+        .catch(() => { alert("Error!"); });
     });
 </script>
 </body>
