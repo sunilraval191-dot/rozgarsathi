@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KamNiVaat | Jobs in Kalol, Gandhinagar, Ahmedabad & Kadi</title>
+    <title>KamNiVaat | Jobs in Kalol, Gandhinagar & Ahmedabad</title>
     <meta name="description" content="KamNiVaat (Kam Ni Vaat) for local Nokri. Find jobs in Kalol, Ahmedabad, Gandhinagar, and Mehsana.">
-    <meta name="keywords" content="Kam ni vat, Kam Ni Vaat, jobs in kalol, jobs in ahmedabad, jobs in gandhinagar, kadi, mahesana, nokri">
     <meta name="google-site-verification" content="j3I1Wz_Ec_huvAWYzIh6CAZdJkLt0CL-eoitgro1Bsk" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
@@ -15,11 +14,32 @@
         header { background: white; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
         .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary); text-decoration: none; }
         .post-btn { background: var(--primary); color: white; padding: 0.7rem 1.2rem; border-radius: 10px; font-weight: 700; text-decoration: none; font-size: 0.85rem; }
+        
         .hero { background: white; padding: 2.5rem 5%; border-bottom: 1px solid var(--border); text-align: center; }
         .search-box { max-width: 600px; margin: 0 auto; }
         .search-box input { width: 100%; padding: 1rem 1.5rem; border-radius: 16px; border: 2px solid var(--border); outline: none; font-size: 1rem; }
-        .job-grid { padding: 2rem 5%; display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; align-items: start; max-width: 1400px; margin: 0 auto; }
-        .job-card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+
+        /* MASONRY LAYOUT FIX */
+        .job-container { padding: 2rem 5%; max-width: 1400px; margin: 0 auto; }
+        #jobBoard {
+            column-count: 3; /* Desktop: 3 columns */
+            column-gap: 20px;
+        }
+        @media (max-width: 1100px) { #jobBoard { column-count: 2; } } /* Tablet: 2 columns */
+        @media (max-width: 700px) { #jobBoard { column-count: 1; } } /* Mobile: 1 column */
+
+        .job-card { 
+            background: white; 
+            border: 1px solid var(--border); 
+            border-radius: 16px; 
+            padding: 1.5rem; 
+            margin-bottom: 20px; /* Space between stacked cards */
+            break-inside: avoid; /* CRITICAL: Prevents card from splitting across columns */
+            display: inline-block; /* Helps with masonry flow */
+            width: 100%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
         .co-name { font-size: 1.3rem; font-weight: 800; color: #0f172a; }
         .loc { font-size: 0.85rem; color: #64748b; margin-bottom: 12px; font-weight: 600; }
         .desc-box { background: #fff9c4; padding: 10px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 15px; border-left: 4px solid #fbc02d; color: #856404; }
@@ -33,7 +53,10 @@
 <body>
     <header><a href="index.html" class="logo">KamNiVaat</a><a href="post-job.html" class="post-btn">Post Job FREE</a></header>
     <section class="hero"><div class="search-box"><input type="text" id="searchInput" placeholder="Search Company, Role or City..."></div></section>
-    <div class="job-grid" id="jobBoard"></div>
+    
+    <div class="job-container">
+        <div id="jobBoard"></div>
+    </div>
 
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwyUadUReYZIBZmF1dxxGp2tEANZwH7X9lfsz5OSSR9Z2AsVcSjL1UrbPIKiQzCnsvD/exec';
@@ -41,14 +64,14 @@
 
     async function fetchJobs() {
         const board = document.getElementById('jobBoard');
-        board.innerHTML = "<p style='text-align:center;'>Loading Nokri Updates...</p>";
+        board.innerHTML = "<p style='text-align:center;'>Fetching latest Nokri...</p>";
         try {
             const response = await fetch(scriptURL);
             const data = await response.json();
             const now = Date.now();
             allJobs = data.filter(item => (now - new Date(item.Timestamp).getTime()) < (7 * 24 * 60 * 60 * 1000) && item.Status !== "DELETED").reverse();
             display(allJobs);
-        } catch (e) { board.innerHTML = "<p>Error connecting to database.</p>"; }
+        } catch (e) { board.innerHTML = "<p>Database sync error.</p>"; }
     }
 
     function display(list) {
@@ -75,15 +98,15 @@
             }
 
             card.innerHTML = `
-                <div class="co-name">${safe(row['Company Name'] || 'Hiring Company')}</div>
-                <div class="loc">📍 ${safe(row['Location'] || 'Local Area')}</div>
-                ${safe(row['Company Desc']) ? `<div class="desc-box"><strong>Interview/Walk-in:</strong><br>${row['Company Desc']}</div>` : ''}
+                <div class="co-name">${safe(row['Company Name'] || 'Employer')}</div>
+                <div class="loc">📍 ${safe(row['Location'] || 'Local')}</div>
+                ${safe(row['Company Desc']) ? `<div class="desc-box"><strong>Walk-in/Interview:</strong><br>${row['Company Desc']}</div>` : ''}
                 <div>${rolesHtml}</div>
                 <div class="contact-box">
                     <div style="font-size:1rem; font-weight:800;">📞 M: ${safe(row['Contact Number'])}</div>
                     ${safe(row['Company Email']) ? `<div style="color:var(--primary); font-size:0.85rem;">📧 ${row['Company Email']}</div>` : ''}
                 </div>
-                <a href="https://api.whatsapp.com/send?text=*Job Opening at ${row['Company Name']}*%0A📍 ${row['Location']}%0A%0A👉 View Details: https://sunilraval191-dot.github.io/KamNiVaat/" target="_blank" class="share-btn">🟢 WhatsApp Share</a>`;
+                <a href="https://api.whatsapp.com/send?text=*Job Opening at ${row['Company Name']}*%0A📍 ${row['Location']}%0A%0A👉 https://sunilraval191-dot.github.io/KamNiVaat/" target="_blank" class="share-btn">🟢 WhatsApp Share</a>`;
             board.appendChild(card);
         });
     }
