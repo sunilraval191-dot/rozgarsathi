@@ -3,62 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>KamNiVaat | Jobs in Kalol, Gandhinagar, Ahmedabad & Kadi</title>
-    <meta name="description" content="KamNiVaat (Kam Ni Vaat) for local Nokri. Find jobs in Kalol, Ahmedabad, Gandhinagar, and Mehsana.">
-    <meta name="keywords" content="Kam ni vat, Kam Ni Vaat, jobs in kalol, jobs in ahmedabad, jobs in gandhinagar, kadi, mahesana, nokri">
-    
-    <meta name="google-site-verification" content="j3I1Wz_Ec_huvAWYzIh6CAZdJkLt0CL-eoitgro1Bsk" />
-
+    <title>KamNiVaat | Jobs in Kalol & Gandhinagar</title>
+   <meta name="google-site-verification" content="j3I1Wz_Ec_huvAWYzIh6CAZdJkLt0CL-eoitgro1Bsk" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
-        :root { --primary: #2563eb; --bg: #f8fafc; --text: #1e293b; --border: #e2e8f0; }
+        :root { --primary: #2563eb; --bg: #f8fafc; --text: #1e293b; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
-        header { background: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+        header { background: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 1000; }
         .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary); text-decoration: none; }
-        .hero { background: white; padding: 2rem 5%; border-bottom: 1px solid var(--border); text-align: center; }
-        .search-box { max-width: 600px; margin: 0 auto; }
-        .search-box input { width: 100%; padding: 0.8rem 1.2rem; border-radius: 12px; border: 2px solid var(--border); outline: none; transition: 0.3s; }
-        .search-box input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
-        
-        .job-container { padding: 2rem 5%; max-width: 1400px; margin: 0 auto; }
+        .search-box { max-width: 600px; margin: 2rem auto; padding: 0 5%; }
+        .search-box input { width: 100%; padding: 1rem; border-radius: 12px; border: 2px solid #e2e8f0; outline: none; }
+        .job-container { padding: 0 5%; max-width: 1400px; margin: 0 auto; }
         #jobBoard { column-count: 3; column-gap: 20px; }
         @media (max-width: 1100px) { #jobBoard { column-count: 2; } }
         @media (max-width: 700px) { #jobBoard { column-count: 1; } }
-
-        .job-card { 
-            background: white; border: 1px solid var(--border); border-radius: 16px; 
-            padding: 1.5rem; margin-bottom: 20px; break-inside: avoid; display: inline-block; width: 100%;
-            transition: transform 0.2s;
-        }
-
-        /* SKELETON LOADER ANIMATION */
-        .skeleton {
-            background: #eee;
-            background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
-            border-radius: 12px;
-            background-size: 200% 100%;
-            animation: 1.5s shine linear infinite;
-            margin-bottom: 10px;
-        }
-        @keyframes shine { to { background-position-x: -200%; } }
-
-        .role-title { font-weight: 700; color: var(--primary); border-top: 1px solid #f1f5f9; padding-top: 10px; margin-top: 10px; }
+        .job-card { background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 1.5rem; margin-bottom: 20px; break-inside: avoid; display: inline-block; width: 100%; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .skeleton { background: #eee; height: 120px; border-radius: 12px; margin-bottom: 20px; animation: shine 1.5s infinite linear; }
+        @keyframes shine { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
         .badge { font-size: 0.7rem; font-weight: 700; padding: 4px 8px; border-radius: 6px; background: #eff6ff; color: #1e40af; margin: 4px 4px 0 0; display: inline-block; }
-        .contact-box { background: #f8fafc; padding: 12px; border-radius: 12px; margin-top: 15px; border: 1px solid var(--border); }
-        .share-btn { width: 100%; background: #25D366; color: white; padding: 10px; text-align: center; border-radius: 8px; text-decoration: none; font-weight: 800; margin-top: 10px; display: block; font-size: 0.9rem; }
+        .share-btn { width: 100%; background: #25D366; color: white; padding: 10px; text-align: center; border-radius: 8px; text-decoration: none; font-weight: 800; margin-top: 15px; display: block; }
     </style>
 </head>
 <body>
-    <header><a href="index.html" class="logo">KamNiVaat</a><a href="post-job.html" style="background:var(--primary); color:white; padding:8px 16px; border-radius:8px; text-decoration:none; font-weight:700; font-size:0.8rem;">Post Job FREE</a></header>
-    <section class="hero"><div class="search-box"><input type="text" id="searchInput" placeholder="Search by Role, City or Company..."></div></section>
-    
+    <header><a href="index.html" class="logo">KamNiVaat</a><a href="post-job.html" style="background:var(--primary); color:white; padding:8px 16px; border-radius:8px; text-decoration:none; font-weight:700;">Post Job FREE</a></header>
+    <div class="search-box"><input type="text" id="searchInput" placeholder="Search by Role or Company..."></div>
     <div class="job-container">
         <div id="jobBoard">
-            <div class="job-card"><div class="skeleton" style="height:25px; width:60%;"></div><div class="skeleton" style="height:15px; width:40%;"></div><div class="skeleton" style="height:80px;"></div></div>
-            <div class="job-card"><div class="skeleton" style="height:25px; width:70%;"></div><div class="skeleton" style="height:15px; width:30%;"></div><div class="skeleton" style="height:100px;"></div></div>
-            <div class="job-card"><div class="skeleton" style="height:25px; width:50%;"></div><div class="skeleton" style="height:15px; width:50%;"></div><div class="skeleton" style="height:60px;"></div></div>
+            <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
         </div>
     </div>
 
@@ -69,36 +41,50 @@
     async function fetchJobs() {
         try {
             const response = await fetch(scriptURL);
-            const data = await response.json();
-            const now = Date.now();
-            
-            // 7-DAY AUTO HIDE LOGIC INCLUDED HERE
-            allJobs = data.filter(item => (now - new Date(item.Timestamp).getTime()) < (7 * 24 * 60 * 60 * 1000) && item.Status !== "DELETED").reverse();
-            
+            allJobs = await response.json();
             display(allJobs);
         } catch (e) {
-            document.getElementById('jobBoard').innerHTML = "<p style='text-align:center;'>Check your internet or script URL.</p>";
+            document.getElementById('jobBoard').innerHTML = "<p>Data Error. Check script permissions.</p>";
         }
     }
 
     function display(list) {
         const board = document.getElementById('jobBoard');
-        if (list.length === 0) {
-            board.innerHTML = "<p style='text-align:center; width:100%; grid-column:1/-1;'>No active jobs found.</p>";
+        if (!list || list.length === 0) {
+            board.innerHTML = "<p style='text-align:center;'>No jobs posted in the last 7 days.</p>";
             return;
         }
-        
         let html = "";
         list.forEach(row => {
             const safe = (val) => val && val.toString().trim() !== "" ? val : null;
-            let rolesHtml = "";
-            
+            let roles = "";
             for(let i=1; i<=5; i++) {
                 if (safe(row[`Role ${i}`])) {
-                    rolesHtml += `
-                    <div class="role-card">
-                        <div class="role-title">● ${safe(row[`Role ${i}`])}</div>
-                        <div>
-                            ${safe(row[`Qual ${i}`]) ? `<span class="badge">🎓 ${row[`Qual ${i}`]}</span>` : ''}
-                            ${safe(row[`Openings ${i}`]) ? `<span class="badge">👥 ${row[`Openings ${i}`]} Openings</span>` : ''}
-                            ${safe(row[`Exp ${
+                    roles += `<div style="border-top:1px solid #f1f5f9; padding-top:10px; margin-top:10px;">
+                        <div style="font-weight:700; color:#2563eb;">● ${row[`Role ${i}`]}</div>
+                        ${safe(row[`Qual ${i}`]) ? `<span class="badge">🎓 ${row[`Qual ${i}`]}</span>` : ''}
+                        ${safe(row[`Salary ${i}`]) ? `<span class="badge">💰 ${row[`Salary ${i}`]}</span>` : ''}
+                    </div>`;
+                }
+            }
+            html += `<div class="job-card">
+                <div style="font-size:1.3rem; font-weight:800;">${row['Company Name']}</div>
+                <div style="font-size:0.85rem; color:#64748b; margin-bottom:12px;">📍 ${row['Location']}</div>
+                ${safe(row['Company Desc']) ? `<div style="background:#fff9c4; padding:10px; border-radius:8px; font-size:0.85rem; margin-bottom:10px;">${row['Company Desc']}</div>` : ''}
+                ${roles}
+                <div style="background:#f8fafc; padding:10px; border-radius:10px; margin-top:15px; font-weight:800;">📞 ${row['Contact Number']}</div>
+                <a href="https://api.whatsapp.com/send?text=Check this Job on KamNiVaat: https://sunilraval191.github.io/KamNiVaat/" class="share-btn">WhatsApp Share</a>
+            </div>`;
+        });
+        board.innerHTML = html;
+    }
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        const q = e.target.value.toLowerCase();
+        display(allJobs.filter(r => (r['Company Name'] + r['Role 1']).toLowerCase().includes(q)));
+    });
+
+    window.onload = fetchJobs;
+</script>
+</body>
+</html>
