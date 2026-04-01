@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>KamNiVaat | Jobs in Kalol, Gandhinagar, Ahmedabad & Kadi</title>
-    <meta name="description" content="KamNiVaat (Kam Ni Vaat) for local Nokri. Find jobs in Kalol, Ahmedabad, Gandhinagar, and Mehsana.">
-    <meta name="keywords" content="Kam ni vat, Kam Ni Vaat, jobs in kalol, jobs in ahmedabad, jobs in gandhinagar, kadi, mahesana, nokri">
-    
+    <title>KamNiVaat | Local Jobs in Kalol & Gandhinagar</title>
+    <meta name="description" content="KamNiVaat for local Nokri. Find jobs in Kalol, Ahmedabad, and Gandhinagar.">
    <meta name="google-site-verification" content="j3I1Wz_Ec_huvAWYzIh6CAZdJkLt0CL-eoitgro1Bsk" />
 
     <style>
@@ -20,45 +17,31 @@
         .hero { background: white; padding: 2rem 5%; border-bottom: 1px solid var(--border); text-align: center; }
         .search-box { max-width: 600px; margin: 0 auto; }
         .search-box input { width: 100%; padding: 0.8rem 1.2rem; border-radius: 12px; border: 2px solid var(--border); outline: none; transition: 0.3s; }
-        .search-box input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
         
         .job-container { padding: 2rem 5%; max-width: 1400px; margin: 0 auto; }
         #jobBoard { column-count: 3; column-gap: 20px; }
         @media (max-width: 1100px) { #jobBoard { column-count: 2; } }
         @media (max-width: 700px) { #jobBoard { column-count: 1; } }
 
-        .job-card { 
-            background: white; border: 1px solid var(--border); border-radius: 16px; 
-            padding: 1.5rem; margin-bottom: 20px; break-inside: avoid; display: inline-block; width: 100%;
-            transition: transform 0.2s;
-        }
+        .job-card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; margin-bottom: 20px; break-inside: avoid; display: inline-block; width: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .skeleton { background: #eee; height: 100px; border-radius: 12px; margin-bottom: 10px; animation: shine 1.5s infinite linear; }
+        @keyframes shine { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
 
-        /* SKELETON LOADER ANIMATION */
-        .skeleton {
-            background: #eee;
-            background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
-            border-radius: 12px;
-            background-size: 200% 100%;
-            animation: 1.5s shine linear infinite;
-            margin-bottom: 10px;
-        }
-        @keyframes shine { to { background-position-x: -200%; } }
-
-        .role-title { font-weight: 700; color: var(--primary); border-top: 1px solid #f1f5f9; padding-top: 10px; margin-top: 10px; }
+        .role-card { border-top: 1px solid #f1f5f9; padding-top: 10px; margin-top: 10px; }
+        .role-title { font-weight: 700; color: var(--primary); font-size: 1.05rem; }
         .badge { font-size: 0.7rem; font-weight: 700; padding: 4px 8px; border-radius: 6px; background: #eff6ff; color: #1e40af; margin: 4px 4px 0 0; display: inline-block; }
         .contact-box { background: #f8fafc; padding: 12px; border-radius: 12px; margin-top: 15px; border: 1px solid var(--border); }
-        .share-btn { width: 100%; background: #25D366; color: white; padding: 10px; text-align: center; border-radius: 8px; text-decoration: none; font-weight: 800; margin-top: 10px; display: block; font-size: 0.9rem; }
+        .share-btn { width: 100%; background: #25D366; color: white; padding: 12px; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 800; margin-top: 15px; display: block; font-size: 0.9rem; }
     </style>
 </head>
 <body>
-    <header><a href="index.html" class="logo">KamNiVaat</a><a href="post-job.html" style="background:var(--primary); color:white; padding:8px 16px; border-radius:8px; text-decoration:none; font-weight:700; font-size:0.8rem;">Post Job FREE</a></header>
-    <section class="hero"><div class="search-box"><input type="text" id="searchInput" placeholder="Search by Role, City or Company..."></div></section>
+    <header><a href="index.html" class="logo">KamNiVaat</a><a href="post-job.html" style="background:var(--primary); color:white; padding:8px 16px; border-radius:8px; text-decoration:none; font-weight:700;">Post Job FREE</a></header>
+    <section class="hero"><div class="search-box"><input type="text" id="searchInput" placeholder="Search Company, Role or City..."></div></section>
     
     <div class="job-container">
         <div id="jobBoard">
-            <div class="job-card"><div class="skeleton" style="height:25px; width:60%;"></div><div class="skeleton" style="height:15px; width:40%;"></div><div class="skeleton" style="height:80px;"></div></div>
-            <div class="job-card"><div class="skeleton" style="height:25px; width:70%;"></div><div class="skeleton" style="height:15px; width:30%;"></div><div class="skeleton" style="height:100px;"></div></div>
-            <div class="job-card"><div class="skeleton" style="height:25px; width:50%;"></div><div class="skeleton" style="height:15px; width:50%;"></div><div class="skeleton" style="height:60px;"></div></div>
+            <div class="job-card"><div class="skeleton"></div></div>
+            <div class="job-card"><div class="skeleton"></div></div>
         </div>
     </div>
 
@@ -66,59 +49,67 @@
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwyUadUReYZIBZmF1dxxGp2tEANZwH7X9lfsz5OSSR9Z2AsVcSjL1UrbPIKiQzCnsvD/exec';
     let allJobs = [];
 
+    // Helper function to check if data exists
+    const safe = (val) => {
+        if (!val) return null;
+        const trimmed = val.toString().trim();
+        return (trimmed === "" || trimmed === "null" || trimmed === "undefined") ? null : trimmed;
+    };
+
     async function fetchJobs() {
         try {
             const response = await fetch(scriptURL);
             const data = await response.json();
             const now = Date.now();
-            
-            // 7-DAY AUTO HIDE LOGIC
             allJobs = data.filter(item => (now - new Date(item.Timestamp).getTime()) < (7 * 24 * 60 * 60 * 1000) && item.Status !== "DELETED").reverse();
-            
             display(allJobs);
-        } catch (e) {
-            document.getElementById('jobBoard').innerHTML = "<p style='text-align:center;'>Check your internet or script URL.</p>";
-        }
+        } catch (e) { document.getElementById('jobBoard').innerHTML = "<p>Data Sync Error.</p>"; }
     }
 
     function display(list) {
         const board = document.getElementById('jobBoard');
-        if (list.length === 0) {
-            board.innerHTML = "<p style='text-align:center; width:100%;'>No active jobs found.</p>";
-            return;
-        }
+        if (list.length === 0) { board.innerHTML = "<p style='text-align:center;'>No active jobs matching your search.</p>"; return; }
         
         let html = "";
         list.forEach(row => {
-            const safe = (val) => val && val.toString().trim() !== "" ? val : null;
             let rolesHtml = "";
-            
             for(let i=1; i<=5; i++) {
                 if (safe(row[`Role ${i}`])) {
                     rolesHtml += `
                     <div class="role-card">
                         <div class="role-title">● ${safe(row[`Role ${i}`])}</div>
-                        <div>
+                        <div style="margin-top:4px;">
                             ${safe(row[`Qual ${i}`]) ? `<span class="badge">🎓 ${row[`Qual ${i}`]}</span>` : ''}
-                            ${safe(row[`Openings ${i}`]) ? `<span class="badge">👥 ${row[`Openings ${i}`]} Openings</span>` : ''}
-                            ${safe(row[`Exp ${i}`]) ? `<span class="badge">⏳ ${row[`Exp ${i}`]}</span>` : ''}
+                            ${safe(row[`Openings ${i}`]) ? `<span class="badge">👥 ${row[`Openings ${i}`]} Positions</span>` : ''}
+                            ${safe(row[`Exp ${i}`]) ? `<span class="badge">⏳ ${row[`Exp ${i}`]} Exp</span>` : ''}
                             ${safe(row[`Salary ${i}`]) ? `<span class="badge">💰 ${row[`Salary ${i}`]}</span>` : ''}
                         </div>
-                        ${safe(row[`JD ${i}`]) ? `<div style="font-size:0.8rem; color:#64748b; margin-top:8px;">${row[`JD ${i}`]}</div>` : ''}
+                        ${safe(row[`JD ${i}`]) ? `<div style="font-size:0.8rem; color:#64748b; margin-top:8px; border-left: 2px solid #eee; padding-left: 8px;">${row[`JD ${i}`]}</div>` : ''}
                     </div>`;
                 }
             }
 
             html += `
                 <div class="job-card">
-                    <div style="font-size:1.3rem; font-weight:800; color:#0f172a;">${safe(row['Company Name'] || 'Employer')}</div>
-                    <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-bottom:12px;">📍 ${safe(row['Location'] || 'Local Area')}</div>
-                    ${safe(row['Company Desc']) ? `<div style="background:#fff9c4; padding:10px; border-radius:8px; font-size:0.85rem; margin-bottom:15px; border-left:4px solid #fbc02d;"><strong>Interview Details:</strong><br>${row['Company Desc']}</div>` : ''}
-                    ${rolesHtml}
+                    <div style="font-size:1.3rem; font-weight:800; color:#0f172a;">${safe(row['Company Name'])}</div>
+                    <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-bottom:12px;">📍 ${safe(row['Location'])}</div>
+                    
+                    ${safe(row['Company Desc']) ? `
+                        <div style="background:#fff9c4; padding:10px; border-radius:8px; font-size:0.85rem; margin-bottom:15px; border-left:4px solid #fbc02d; color:#856404;">
+                            <strong>Interview Info:</strong><br>${row['Company Desc']}
+                        </div>` : ''}
+                    
+                    <div>${rolesHtml}</div>
+                    
                     <div class="contact-box">
-                        <div style="font-size:1rem; font-weight:800;">📞 Call: ${safe(row['Contact Number'])}</div>
+                        <div style="font-size:1.1rem; font-weight:800;">📞 Call: ${safe(row['Contact Number'])}</div>
+                        ${safe(row['Company Email']) ? `
+                            <div style="font-size:0.85rem; color:var(--primary); margin-top:5px; font-weight:600; border-top:1px solid #eee; padding-top:5px;">
+                                📧 ${row['Company Email']}
+                            </div>` : ''}
                     </div>
-                    <a href="https://api.whatsapp.com/send?text=*Job Vacancy at ${row['Company Name']}*%0A📍 ${row['Location']}%0A%0A👉 View Details: https://sunilraval191-dot.github.io/KamNiVaat/" target="_blank" class="share-btn">🟢 Share on WhatsApp</a>
+                    
+                    <a href="https://api.whatsapp.com/send?text=*Job Opening at ${row['Company Name']}*%0A📍 ${row['Location']}%0A%0A👉 View Details: https://sunilraval191-dot.github.io/KamNiVaat/" target="_blank" class="share-btn">🟢 WhatsApp Share</a>
                 </div>`;
         });
         board.innerHTML = html;
@@ -126,12 +117,8 @@
 
     document.getElementById('searchInput').addEventListener('input', (e) => {
         const q = e.target.value.toLowerCase();
-        const filtered = allJobs.filter(r => 
-            (r['Company Name'] + r['Location'] + r['Role 1'] + r['Role 2']).toLowerCase().includes(q)
-        );
-        display(filtered);
+        display(allJobs.filter(r => (r['Company Name'] + r['Location'] + r['Role 1']).toLowerCase().includes(q)));
     });
-
     window.onload = fetchJobs;
 </script>
 </body>
